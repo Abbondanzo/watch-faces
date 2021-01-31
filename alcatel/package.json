@@ -15,7 +15,7 @@
     "appType": "clockface",
     "appDisplayName": "Alcatel",
     "iconFile": "resources/icon.png",
-    "wipeColor": "",
+    "wipeColor": "#ffffff",
     "requestedPermissions": [
       "access_activity",
       "access_heart_rate"

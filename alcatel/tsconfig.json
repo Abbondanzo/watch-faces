@@ -1,3 +1,6 @@
 {
+  "compilerOptions": {
+    "strict": true
+  },
   "extends": "./node_modules/@fitbit/sdk/sdk-tsconfig.json"
 }

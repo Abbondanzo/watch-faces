@@ -23,12 +23,14 @@ const resetDots = () => {
 };
 
 const dialCallback = ({ second }: { second: number }) => {
-  // Reset on second 1
-  if (second === 1) {
+  // Register second 0 separate from loop, reset on second 1
+  if (second === 0) {
+    dialDots[0].style.opacity = 0.8;
+  } else if (second === 1) {
     resetDots();
   }
   // Ensure that all second dots are set correctly
-  for (let i = 0; i <= second; i++) {
+  for (let i = 1; i <= second; i++) {
     dialDots[i].style.opacity = 0.8;
   }
 };

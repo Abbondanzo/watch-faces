@@ -29,11 +29,3 @@ text {
   text-length: 28;
   y: 32;
 }
-
-#dial .on {
-  opacity: 0.8;
-}
-
-#dial .off {
-  opacity: 0.2;
-}

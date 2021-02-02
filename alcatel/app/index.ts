@@ -16,19 +16,20 @@ Time.initialize(timeCallback);
 /* ================ Seconds Dial ================ */
 const dialContainer = document.getElementById("dial");
 const dialDots = dialContainer?.getElementsByTagName("circle") || [];
+const resetDots = () => {
+  dialDots.forEach((dialDot) => {
+    dialDot.style.opacity = 0.2;
+  });
+};
+
 const dialCallback = ({ second }: { second: number }) => {
-  console.log(second);
-  try {
-    if (second === 0) {
-      for (let i = 0; i < 60; i++) {
-        dialDots[i].class = "off";
-      }
-    }
-    for (let i = 0; i < second; i++) {
-      dialDots[i].class = "on";
-    }
-  } catch (err) {
-    console.error(err);
+  // Reset on second 1
+  if (second === 1) {
+    resetDots();
+  }
+  // Ensure that all second dots are set correctly
+  for (let i = 0; i <= second; i++) {
+    dialDots[i].style.opacity = 0.8;
   }
 };
 Dial.initialize(dialCallback);

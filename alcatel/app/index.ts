@@ -21,7 +21,6 @@ const resetDots = () => {
     dialDot.style.opacity = 0.2;
   });
 };
-
 const dialCallback = ({ second }: { second: number }) => {
   // Register second 0 separate from loop, reset on second 1
   if (second === 0) {
@@ -35,3 +34,6 @@ const dialCallback = ({ second }: { second: number }) => {
   }
 };
 Dial.initialize(dialCallback);
+
+/* ================ Activity ================ */
+// TODO: Write

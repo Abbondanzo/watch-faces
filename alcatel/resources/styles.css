@@ -13,8 +13,27 @@ text {
   fill: black;
 }
 
-#time {
+.center {
   x: 50%;
-  y: 25%;
-  font-size: 45;
+  y: 50%;
+}
+
+.time-text {
+  font-size: 72;
+  text-length: 8;
+  y: 0;
+}
+
+.date-text {
+  font-size: 16;
+  text-length: 28;
+  y: 32;
+}
+
+#dial .on {
+  opacity: 0.8;
+}
+
+#dial .off {
+  opacity: 0.2;
 }

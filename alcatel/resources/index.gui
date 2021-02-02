@@ -1,4 +1,8 @@
 <svg>
   <rect id="background" />
-  <text id="time">13:37</text>
+  <g transform="translate(50%, 50%)">
+    <text id="time" class="time-text">13:37</text>
+    <text id="date" class="date-text">MONDAY, 25 JANUARY</text>
+  </g>
+  <link rel="import" href="dial.gui" />
 </svg>

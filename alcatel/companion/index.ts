@@ -1,1 +1,3 @@
-console.log("Hello world!");
+import { initialize } from "./settings";
+
+initialize();

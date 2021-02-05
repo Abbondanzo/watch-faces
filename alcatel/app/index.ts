@@ -1,5 +1,6 @@
 import Activity, { ActivityData } from "./features/activity";
 import HeartRate, { HeartRateData } from "./features/heart-rate";
+import Settings, { SettingsData } from "./features/settings";
 import document from "document";
 
 import Time from "./features/time";
@@ -50,3 +51,17 @@ const dialCallback = ({ second }: { second: number }) => {
   }
 };
 Dial.initialize(dialCallback);
+
+/* ================ Settings ================ */
+const background = document.getElementById("background") as RectElement;
+const settingsCallback = (data: SettingsData) => {
+  if (data.secondsEnabled) {
+    if (dialContainer) dialContainer.class = "";
+    Dial.start();
+  } else {
+    if (dialContainer) dialContainer.class = "hidden";
+    Dial.stop();
+  }
+  background.style.fill = data.backgroundColor;
+};
+Settings.initialize(settingsCallback);

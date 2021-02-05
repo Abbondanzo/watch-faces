@@ -3,11 +3,22 @@ registerSettingsPage(({ settings }) => (
     <Section
       title={
         <Text bold align="center">
-          App Settings
+          Alcatel Settings
         </Text>
       }
     >
-      <Text>Hello world!</Text>
+      <Toggle settingsKey="secondsDial" label="Seconds Dial" />
+      <ColorSelect
+        settingsKey="backgroundColor"
+        colors={[
+          { color: "black" },
+          { color: "sandybrown" },
+          { color: "gold" },
+          { color: "aquamarine" },
+          { color: "deepskyblue" },
+          { color: "plum" },
+        ]}
+      />
     </Section>
   </Page>
 ));

@@ -1,3 +1,4 @@
+import Activity, { ActivityData } from "./features/activity";
 import HeartRate, { HeartRateData } from "./features/heart-rate";
 import document from "document";
 
@@ -13,6 +14,20 @@ const timeCallback = ({ time, date }: { time: string; date: string }) => {
   if (dateText) dateText.text = date;
 };
 Time.initialize(timeCallback);
+
+/* ================ Heart Rate ================ */
+const heartRateText = document.getElementById("heart-rate-text");
+const heartRateCallback = (data: HeartRateData) => {
+  if (heartRateText) heartRateText.text = data.bpm;
+};
+HeartRate.initialize(heartRateCallback);
+
+/* ================ Activity ================ */
+const stepsText = document.getElementById("steps-text");
+const activityCallback = (data: ActivityData) => {
+  if (stepsText) stepsText.text = data.steps;
+};
+Activity.initialize(activityCallback);
 
 /* ================ Seconds Dial ================ */
 const dialContainer = document.getElementById("dial");
@@ -35,13 +50,3 @@ const dialCallback = ({ second }: { second: number }) => {
   }
 };
 Dial.initialize(dialCallback);
-
-/* ================ Heart Rate ================ */
-const heartRateText = document.getElementById("heart-rate-text");
-const heartRateCallback = (data: HeartRateData) => {
-  if (heartRateText) heartRateText.text = data.bpm;
-};
-HeartRate.initialize(heartRateCallback);
-
-/* ================ Activity ================ */
-// TODO: Write

@@ -34,7 +34,7 @@ class HeartRate implements Feature<HeartRateData> {
         this.lastHeartRate = hrm.heartRate;
       }
     } else {
-      console.log("Denied Heart Rate or User Profile permissions");
+      console.log("access_heart_rate or access_user_profile permission denied");
       callback({
         bpm: "--",
         zone: "denied",

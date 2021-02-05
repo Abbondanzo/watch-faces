@@ -22,7 +22,6 @@ class Settings implements Feature<SettingsData> {
   }
 
   private fireCallback() {
-    console.log(JSON.stringify(this.settings));
     this.callback({
       secondsEnabled: Boolean(this.settings["secondsDial"]),
       backgroundColor: (this.settings["backgroundColor"] as string) || "black",

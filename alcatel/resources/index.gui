@@ -5,4 +5,14 @@
     <text id="date" class="date-text">MONDAY, 25 JANUARY</text>
   </g>
   <link rel="import" href="dial.gui" />
+  <section width="200" height="24" x="50%-100" y="70%">
+    <section class="use-item" x="16%">
+      <use id="heart-rate-use" href="#heart-rate" x="-6" />
+      <text id="heart-rate-text">99</text>
+    </section>
+    <section class="use-item" x="50%">
+      <image href="images/steps.png" class="image" />
+      <text id="steps-text">1,234</text>
+    </section>
+  </section>
 </svg>

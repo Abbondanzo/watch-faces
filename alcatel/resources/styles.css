@@ -29,3 +29,21 @@ text {
   text-length: 28;
   y: 32;
 }
+
+.use-item text {
+  text-anchor: start;
+  text-align: start;
+  font-size: 20;
+  x: 24;
+  y: 18;
+}
+
+.use-item image {
+  width: 24;
+  height: 24;
+}
+
+#heart-rate-use {
+  width: 24;
+  height: 24;
+}

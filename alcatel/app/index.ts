@@ -56,7 +56,8 @@ const settingsCallback = (data: SettingsData) => {
 Settings.initialize(settingsCallback);
 
 /* ================ Weather ================ */
+const weatherText = document.getElementById("weather-text");
 const weatherCallback = (data: WeatherData) => {
-  console.log(JSON.stringify(data));
+  if (weatherText) weatherText.text = data.temperature;
 };
 Weather.initialize(weatherCallback);

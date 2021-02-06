@@ -1,5 +1,6 @@
-import * as messaging from "messaging";
 import { settingsStorage } from "settings";
+
+import { sendSettings } from "./../common/settings";
 
 export const initialize = () => {
   settingsStorage.addEventListener("change", (evt) => {
@@ -11,17 +12,9 @@ export const initialize = () => {
 
 const sendValue = (key: string, val: string | null) => {
   if (val) {
-    sendSettingData({
+    sendSettings({
       key,
       value: JSON.parse(val),
     });
-  }
-};
-
-const sendSettingData = (data: any) => {
-  if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
-    messaging.peerSocket.send(data);
-  } else {
-    console.log("No peerSocket connection");
   }
 };

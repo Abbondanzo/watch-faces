@@ -1,6 +1,7 @@
 import { me } from "appbit";
 import * as fs from "fs";
-import * as messaging from "messaging";
+
+import { receiveSettings } from "./../../common/settings";
 
 const SETTINGS_TYPE = "cbor";
 const SETTINGS_FILE = "settings.cbor";
@@ -12,7 +13,10 @@ export interface SettingsData {
 
 class Settings implements Feature<SettingsData> {
   private callback: Callback<SettingsData> = () => {};
-  private settings: { [key: string]: string | boolean } = {};
+  private settings: SettingsData = {
+    secondsEnabled: true,
+    backgroundColor: "black",
+  };
 
   initialize(callback: Callback<SettingsData>) {
     this.callback = callback;
@@ -22,17 +26,15 @@ class Settings implements Feature<SettingsData> {
   }
 
   private fireCallback() {
-    this.callback({
-      secondsEnabled: Boolean(this.settings["secondsDial"]),
-      backgroundColor: (this.settings["backgroundColor"] as string) || "black",
-    });
+    this.callback(this.settings);
   }
 
   private listenToMessages() {
-    messaging.peerSocket.addEventListener("message", (event) => {
-      this.settings[event.data.key] = event.data.value;
+    receiveSettings((data) => {
+      this.settings[data.key] = data.value;
       this.fireCallback();
     });
+
     me.addEventListener("unload", this.saveSettings.bind(this));
   }
 

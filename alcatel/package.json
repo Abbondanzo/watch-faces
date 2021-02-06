@@ -9,6 +9,7 @@
   "devDependencies": {
     "@fitbit/sdk": "^4.2.1",
     "@fitbit/sdk-cli": "^1.7.3",
+    "@types/node": "^14.14.25",
     "fitbit-sdk-types": "^6.0.2"
   },
   "fitbit": {

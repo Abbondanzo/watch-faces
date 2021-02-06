@@ -1,3 +1,5 @@
-import { initialize } from "./settings";
+import { initialize as initializeSettings } from "./settings";
+import { initialize as initializeWeather } from "./weather";
 
-initialize();
+initializeWeather();
+initializeSettings();

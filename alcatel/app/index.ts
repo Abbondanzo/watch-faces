@@ -8,6 +8,12 @@ import Settings, { SettingsData } from "./features/settings";
 import Time, { TimeData } from "./features/time";
 import Weather, { WeatherData } from "./features/weather";
 
+/* ================ Display (handles clock granularity) ================ */
+const displayCallback = (data: DisplayData) => {
+  toggleDialVisibility(data.on);
+};
+Display.initialize(displayCallback);
+
 /* ================ Clock ================ */
 const timeText = document.getElementById("time");
 const dateText = document.getElementById("date");
@@ -108,11 +114,6 @@ const settingsCallback = (data: SettingsData) => {
   toggleDial(data.secondsDial);
   toggleWeather(data.weatherEnabled);
   background.style.fill = data.backgroundColor;
+  Display.refresh();
 };
 Settings.initialize(settingsCallback);
-
-/* ================ Display (handles clock granularity) ================ */
-const displayCallback = (data: DisplayData) => {
-  toggleDialVisibility(data.on);
-};
-Display.initialize(displayCallback);

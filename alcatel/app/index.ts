@@ -1,16 +1,16 @@
-import Activity, { ActivityData } from "./features/activity";
-import HeartRate, { HeartRateData } from "./features/heart-rate";
-import Settings, { SettingsData } from "./features/settings";
 import document from "document";
 
-import Time from "./features/time";
-import Dial from "./features/dial";
+import Activity, { ActivityData } from "./features/activity";
+import Dial, { DialData } from "./features/dial";
+import HeartRate, { HeartRateData } from "./features/heart-rate";
+import Settings, { SettingsData } from "./features/settings";
+import Time, { TimeData } from "./features/time";
 
 /* ================ Clock ================ */
 const timeText = document.getElementById("time");
 const dateText = document.getElementById("date");
 
-const timeCallback = ({ time, date }: { time: string; date: string }) => {
+const timeCallback = ({ time, date }: TimeData) => {
   if (timeText) timeText.text = time;
   if (dateText) dateText.text = date;
 };
@@ -33,21 +33,9 @@ Activity.initialize(activityCallback);
 /* ================ Seconds Dial ================ */
 const dialContainer = document.getElementById("dial");
 const dialDots = dialContainer?.getElementsByTagName("circle") || [];
-const resetDots = () => {
-  dialDots.forEach((dialDot) => {
-    dialDot.style.opacity = 0.2;
-  });
-};
-const dialCallback = ({ second }: { second: number }) => {
-  // Register second 0 separate from loop, reset on second 1
-  if (second === 0) {
-    dialDots[0].style.opacity = 0.8;
-  } else if (second === 1) {
-    resetDots();
-  }
-  // Ensure that all second dots are set correctly
-  for (let i = 1; i <= second; i++) {
-    dialDots[i].style.opacity = 0.8;
+const dialCallback = ({ second }: DialData) => {
+  for (let idx = 0; idx < 60; idx++) {
+    dialDots[idx].style.opacity = idx <= second ? 0.8 : 0.2;
   }
 };
 Dial.initialize(dialCallback);

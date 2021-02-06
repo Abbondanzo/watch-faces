@@ -3,7 +3,7 @@ import { preferences } from "user-settings";
 
 import { zeroPad } from "./../../common/utils";
 
-interface TimeData {
+export interface TimeData {
   time: string;
   date: string;
 }

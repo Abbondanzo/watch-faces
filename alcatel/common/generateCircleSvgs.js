@@ -5,8 +5,8 @@ const COUNT = 60;
 const generateCircleSvgs = ({ radiusPct, fill }) => {
   let output = [];
   for (let i = 0; i < COUNT; i++) {
-    // second-0 is the top
-    const stepSize = (i * Math.PI) / (COUNT / 2) - Math.PI / 2;
+    // second-59 is the top
+    const stepSize = ((i + 1) * Math.PI) / (COUNT / 2) - Math.PI / 2;
     const x = Math.round(radiusPct * Math.cos(stepSize) * 1000);
     const y = Math.round(radiusPct * Math.sin(stepSize) * 1000);
     output.push(

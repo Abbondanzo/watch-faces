@@ -1,6 +1,6 @@
 import clock, { TickEvent } from "clock";
 
-interface DialData {
+export interface DialData {
   second: number;
 }
 

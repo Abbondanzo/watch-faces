@@ -20,13 +20,11 @@ class Dial implements Feature<DialData> {
   start() {
     if (!this.started) {
       this.started = true;
-      clock.granularity = "seconds";
       clock.addEventListener("tick", this.tickHandler);
     }
   }
 
   stop() {
-    clock.granularity = "minutes";
     clock.removeEventListener("tick", this.tickHandler);
     this.started = false;
   }

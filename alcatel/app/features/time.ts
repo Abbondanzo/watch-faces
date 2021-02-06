@@ -8,15 +8,10 @@ export interface TimeData {
   date: string;
 }
 
-interface TimeOptions {
-  granularity: Granularity;
-}
-
-class Time implements Feature<TimeData, TimeOptions> {
+class Time implements Feature<TimeData> {
   private callback: Callback<TimeData> = () => {};
 
-  initialize(callback: Callback<TimeData>, options?: TimeOptions) {
-    clock.granularity = options?.granularity || "minutes";
+  initialize(callback: Callback<TimeData>) {
     this.callback = callback;
     clock.addEventListener("tick", this.tickHandler.bind(this));
   }

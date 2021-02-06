@@ -27,6 +27,10 @@ class Settings implements Feature<SettingsData> {
     this.fireCallback();
   }
 
+  isSecondsDialEnabled(): boolean {
+    return this.settings.secondsDial;
+  }
+
   private fireCallback() {
     this.callback(this.settings);
   }

@@ -2,6 +2,7 @@ import document from "document";
 
 import Activity, { ActivityData } from "./features/activity";
 import Dial, { DialData } from "./features/dial";
+import Display, { DisplayData } from "./features/display";
 import HeartRate, { HeartRateData } from "./features/heart-rate";
 import Settings, { SettingsData } from "./features/settings";
 import Time, { TimeData } from "./features/time";
@@ -34,12 +35,14 @@ Activity.initialize(activityCallback);
 /* ================ Seconds Dial ================ */
 const dialContainer = document.getElementById("dial");
 const dialDots = dialContainer?.getElementsByTagName("circle") || [];
+const toggleDialVisibility = (dialEnabled: boolean) => {
+  if (dialContainer) dialContainer.class = dialEnabled ? "" : "hidden";
+};
 const toggleDial = (dialEnabled: boolean) => {
+  toggleDialVisibility(dialEnabled);
   if (dialEnabled) {
-    if (dialContainer) dialContainer.class = "";
     Dial.start();
   } else {
-    if (dialContainer) dialContainer.class = "hidden";
     Dial.stop();
   }
 };
@@ -107,3 +110,9 @@ const settingsCallback = (data: SettingsData) => {
   background.style.fill = data.backgroundColor;
 };
 Settings.initialize(settingsCallback);
+
+/* ================ Display (handles clock granularity) ================ */
+const displayCallback = (data: DisplayData) => {
+  toggleDialVisibility(data.on);
+};
+Display.initialize(displayCallback);

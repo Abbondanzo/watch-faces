@@ -7,17 +7,12 @@ export interface ActivityData {
   calories: string;
 }
 
-interface ActivityOptions {
-  granularity: Granularity;
-}
-
-class Activity implements Feature<ActivityData, ActivityOptions> {
+class Activity implements Feature<ActivityData> {
   private callback: Callback<ActivityData> = () => {};
 
-  initialize(callback: Callback<ActivityData>, options?: ActivityOptions) {
+  initialize(callback: Callback<ActivityData>) {
     if (me.permissions.granted("access_activity")) {
       this.callback = callback;
-      clock.granularity = options?.granularity || "minutes";
       clock.addEventListener("tick", this.tickHandler.bind(this));
     } else {
       console.log("access_activity permission denied");

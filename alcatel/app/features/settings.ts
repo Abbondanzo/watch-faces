@@ -9,6 +9,7 @@ const SETTINGS_FILE = "settings.cbor";
 export interface SettingsData {
   secondsDial: boolean;
   backgroundColor: string;
+  weatherEnabled: boolean;
 }
 
 class Settings implements Feature<SettingsData> {
@@ -16,6 +17,7 @@ class Settings implements Feature<SettingsData> {
   private settings: SettingsData = {
     secondsDial: true,
     backgroundColor: "black",
+    weatherEnabled: true,
   };
 
   initialize(callback: Callback<SettingsData>) {
@@ -48,7 +50,11 @@ class Settings implements Feature<SettingsData> {
       }
       return settings;
     } catch (ex) {
-      return { secondsDial: true, backgroundColor: "black" };
+      return {
+        secondsDial: true,
+        backgroundColor: "black",
+        weatherEnabled: true,
+      };
     }
   }
 

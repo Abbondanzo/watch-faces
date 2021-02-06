@@ -34,6 +34,15 @@ Activity.initialize(activityCallback);
 /* ================ Seconds Dial ================ */
 const dialContainer = document.getElementById("dial");
 const dialDots = dialContainer?.getElementsByTagName("circle") || [];
+const toggleDial = (dialEnabled: boolean) => {
+  if (dialEnabled) {
+    if (dialContainer) dialContainer.class = "";
+    Dial.start();
+  } else {
+    if (dialContainer) dialContainer.class = "hidden";
+    Dial.stop();
+  }
+};
 const dialCallback = ({ second }: DialData) => {
   for (let idx = 0; idx < 60; idx++) {
     dialDots[idx].style.opacity = idx <= second ? 0.8 : 0.2;
@@ -41,23 +50,20 @@ const dialCallback = ({ second }: DialData) => {
 };
 Dial.initialize(dialCallback);
 
-/* ================ Settings ================ */
-const background = document.getElementById("background") as RectElement;
-const settingsCallback = (data: SettingsData) => {
-  if (data.secondsDial) {
-    if (dialContainer) dialContainer.class = "";
-    Dial.start();
-  } else {
-    if (dialContainer) dialContainer.class = "hidden";
-    Dial.stop();
-  }
-  background.style.fill = data.backgroundColor;
-};
-Settings.initialize(settingsCallback);
-
 /* ================ Weather ================ */
-const weatherText = document.getElementById("weather-text");
+const weatherText = document.getElementById("weather-text") as TextElement;
 const weatherImage = document.getElementById("weather-image") as ImageElement;
+const toggleWeather = (enabled: boolean) => {
+  if (enabled) {
+    Weather.enable();
+    weatherText.style.opacity = 1;
+    weatherImage.style.opacity = 1;
+  } else {
+    Weather.disable();
+    weatherText.style.opacity = 0;
+    weatherImage.style.opacity = 0;
+  }
+};
 const weatherCallback = (data: WeatherData) => {
   if (weatherText) weatherText.text = data.temperature;
   if (weatherImage) {
@@ -92,3 +98,12 @@ const weatherCallback = (data: WeatherData) => {
   }
 };
 Weather.initialize(weatherCallback);
+
+/* ================ Settings ================ */
+const background = document.getElementById("background") as RectElement;
+const settingsCallback = (data: SettingsData) => {
+  toggleDial(data.secondsDial);
+  toggleWeather(data.weatherEnabled);
+  background.style.fill = data.backgroundColor;
+};
+Settings.initialize(settingsCallback);

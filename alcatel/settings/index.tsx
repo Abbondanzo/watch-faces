@@ -7,6 +7,7 @@ registerSettingsPage(({ settings }) => (
         </Text>
       }
     >
+      <Toggle settingsKey="weatherEnabled" label="Weather Enabled" />
       <Toggle settingsKey="secondsDial" label="Seconds Dial" />
       <ColorSelect
         settingsKey="backgroundColor"

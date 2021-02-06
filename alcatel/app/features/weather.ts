@@ -21,6 +21,7 @@ class Weather implements Feature<WeatherData> {
   private callback: Callback<WeatherData> = () => {};
   private lastWeather: WeatherData;
   private intervalId: number | null = null;
+  private enabled = false;
 
   constructor() {
     this.lastWeather = this.loadWeather();
@@ -50,8 +51,18 @@ class Weather implements Feature<WeatherData> {
     this.start();
   }
 
+  enable() {
+    this.enabled = true;
+    this.start();
+  }
+
+  disable() {
+    this.enabled = false;
+    this.stop();
+  }
+
   private start() {
-    if (!this.intervalId) {
+    if (!this.intervalId && this.enabled) {
       sendWeatherRequest();
       this.intervalId = setInterval(sendWeatherRequest, 60000); // Request every 60 seconds
     }
@@ -59,7 +70,7 @@ class Weather implements Feature<WeatherData> {
 
   private stop() {
     if (this.intervalId) {
-      clearInterval(this.intervalId);
+      clearTimeout(this.intervalId);
       this.intervalId = null;
     }
   }

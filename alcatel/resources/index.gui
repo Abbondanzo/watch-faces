@@ -1,7 +1,7 @@
 <svg>
   <rect id="background" />
   <section width="100" height="24" x="50%-50" y="16%">
-    <section class="use-item" x="14%">
+    <section class="use-item" x="14%" id="weather-container">
       <image id="weather-image" href="images/weather/unknown.png" x="-12" y="-4" />
       <text id="weather-text">-- F</text>
     </section>

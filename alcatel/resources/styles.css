@@ -29,22 +29,27 @@ text {
 }
 
 .date-text {
-  font-size: 20;
+  font-size: 24;
   text-length: 28;
-  y: 32;
+  y: 36;
 }
 
 .use-item text {
   text-anchor: start;
   text-align: start;
-  font-size: 20;
+  font-size: 28;
   x: 24;
-  y: 18;
+  y: 22;
 }
 
 .use-item image {
   width: 24;
   height: 24;
+}
+
+#weather-image {
+  width: 32;
+  height: 32;
 }
 
 #heart-rate-use {

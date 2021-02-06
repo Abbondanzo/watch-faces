@@ -66,7 +66,13 @@ class Weather implements Feature<WeatherData> {
 
   private loadWeather(): WeatherData {
     try {
-      return fs.readFileSync(WEATHER_FILE, WEATHER_TYPE);
+      const weather = fs.readFileSync(WEATHER_FILE, WEATHER_TYPE);
+      for (const weatherKey of Object.keys(this.lastWeather)) {
+        if (Object.keys(weather).indexOf(weatherKey) === -1) {
+          throw new Error(`Missing key ${weatherKey}`);
+        }
+      }
+      return weather;
     } catch (ex) {
       return {
         temperature: "--",

@@ -61,18 +61,18 @@ const days = [
   "SATURDAY",
 ];
 const months = [
-  "JANUARY",
-  "FEBRUARY",
-  "MARCH",
-  "APRIL",
+  "JAN",
+  "FEB",
+  "MAR",
+  "APR",
   "MAY",
-  "JUNE",
-  "JULY",
-  "AUGUST",
-  "SEPTEMBER",
-  "OCTOBER",
-  "NOVEMBER",
-  "DECEMBER",
+  "JUN",
+  "JUL",
+  "AUG",
+  "SEPT",
+  "OCT",
+  "NOV",
+  "DEC",
 ];
 
 export default new Time();

@@ -57,7 +57,38 @@ Settings.initialize(settingsCallback);
 
 /* ================ Weather ================ */
 const weatherText = document.getElementById("weather-text");
+const weatherImage = document.getElementById("weather-image") as ImageElement;
 const weatherCallback = (data: WeatherData) => {
   if (weatherText) weatherText.text = data.temperature;
+  if (weatherImage) {
+    switch (data.condition) {
+      case "CLEAR_SKY":
+        weatherImage.href = "images/weather/clear_sky.png";
+        break;
+      case "FEW_CLOUDS":
+      case "SCATTERED_CLOUDS":
+      case "BROKEN_CLOUDS":
+        weatherImage.href = "images/weather/few_clouds.png";
+        break;
+      case "DRIZZLE":
+        weatherImage.href = "images/weather/drizzle.png";
+        break;
+      case "RAIN":
+        weatherImage.href = "images/weather/rain.png";
+        break;
+      case "THUNDERSTORM":
+        weatherImage.href = "images/weather/thunderstorm.png";
+        break;
+      case "SNOW":
+        weatherImage.href = "images/weather/snow.png";
+        break;
+      case "MIST":
+        weatherImage.href = "images/weather/mist.png";
+        break;
+      case "UNKNOWN":
+      default:
+        weatherImage.href = "images/weather/unknown.png";
+    }
+  }
 };
 Weather.initialize(weatherCallback);

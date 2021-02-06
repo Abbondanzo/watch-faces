@@ -38,11 +38,17 @@ class Settings implements Feature<SettingsData> {
     me.addEventListener("unload", this.saveSettings.bind(this));
   }
 
-  private loadSettings() {
+  private loadSettings(): SettingsData {
     try {
-      return fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
+      const settings = fs.readFileSync(SETTINGS_FILE, SETTINGS_TYPE);
+      for (const settingsKey of Object.keys(this.settings)) {
+        if (Object.keys(settings).indexOf(settingsKey) === -1) {
+          throw new Error(`Missing key ${settingsKey}`);
+        }
+      }
+      return settings;
     } catch (ex) {
-      return {};
+      return { secondsDial: true, backgroundColor: "black" };
     }
   }
 

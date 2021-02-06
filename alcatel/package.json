@@ -1,19 +1,31 @@
 {
+  "name": "alcatel",
+  "version": "0.0.4",
+  "license": "MIT",
+  "scripts": {
+    "start": "fitbit",
+    "build": "fitbit-build"
+  },
   "devDependencies": {
-    "@fitbit/sdk": "~4.2.0"
+    "@fitbit/sdk": "^4.2.1",
+    "@fitbit/sdk-cli": "^1.7.3",
+    "@types/node": "^14.14.25",
+    "fitbit-sdk-types": "^6.0.2"
   },
   "fitbit": {
     "appUUID": "855996d2-79db-4f3c-821e-a0880c4fffc0",
     "appType": "clockface",
     "appDisplayName": "Alcatel",
     "iconFile": "resources/icon.png",
-    "wipeColor": "",
+    "wipeColor": "#ffffff",
     "requestedPermissions": [
       "access_activity",
-      "access_heart_rate"
+      "access_heart_rate",
+      "access_internet",
+      "access_location",
+      "access_user_profile"
     ],
     "buildTargets": [
-      "vulcan",
       "mira",
       "higgs",
       "meson",

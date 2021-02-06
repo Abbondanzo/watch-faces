@@ -1,13 +1,59 @@
-.background {
-  viewport-fill: red;
-}
-
-#myLabel {
-  font-size: 80;
-  font-family: System-Bold;
+text {
+  font-size: 32;
+  font-family: System-Regular;
+  font-weight: regular;
   text-length: 32;
   text-anchor: middle;
-  x: 50%;
-  y: 50%+40;
   fill: white;
+}
+
+#background {
+  width: 100%;
+  height: 100%;
+  fill: black;
+}
+
+.hidden {
+  display: none;
+}
+
+.center {
+  x: 50%;
+  y: 50%;
+}
+
+.time-text {
+  font-size: 72;
+  text-length: 8;
+  y: 0;
+}
+
+.date-text {
+  font-size: 24;
+  text-length: 28;
+  y: 36;
+  opacity: 0.8;
+}
+
+.use-item text {
+  text-anchor: start;
+  text-align: start;
+  font-size: 28;
+  x: 24;
+  y: 22;
+}
+
+.use-item image {
+  width: 24;
+  height: 24;
+}
+
+#weather-image {
+  width: 32;
+  height: 32;
+}
+
+#heart-rate-use {
+  width: 24;
+  height: 24;
 }

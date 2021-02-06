@@ -3,24 +3,25 @@ import { receiveWeatherRequest } from "./../common/weather";
 import { getCurrentLocation } from "./location";
 
 export const initialize = () => {
-  const apiKey = process.env.API_KEY;
+  const apiKey = "024f07a43db60fe73b53507aa39a8127"; // process.env.API_KEY;
   if (!apiKey) {
     console.log("Missing OpenWeather API key");
     return;
   }
   receiveWeatherRequest(async () => {
+    console.log("Received weather request");
     try {
       const location = await getCurrentLocation();
-      if (!location) return;
+      if (!location) throw new Error("Unable to obtain location");
       const weatherData = await fetchWeather(
         apiKey,
         location.latitude,
         location.longitude
       );
-      if (!weatherData) return;
+      if (!weatherData) throw new Error("Unable to obtain weather data");
       sendWeather(weatherData);
     } catch (error) {
-      console.error("Error responding to weather request", error);
+      console.error("Error responding to weather request:", error.message);
     }
   });
 };
@@ -64,8 +65,7 @@ const fetchWeather = async (
     return lastWeatherData;
   }
 
-  const url = `https://api.openweatherm
-  import ap.org/data/2.5/weather?appid=${apiKey}&lat=${latitude}&lon=${longitude}`;
+  const url = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&lat=${latitude}&lon=${longitude}`;
   console.log(url);
 
   try {
@@ -87,7 +87,7 @@ const fetchWeather = async (
 
     return lastWeatherData;
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
     return lastWeatherData;
   }
 };

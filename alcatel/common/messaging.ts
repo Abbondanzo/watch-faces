@@ -7,12 +7,13 @@ interface Message {
 
 type Callback<T> = (data: T) => void;
 
-export const sendMessage = (key: string, value: any) => {
+export const sendMessage = async (key: string, value: any) => {
   const data: Message = { key, value };
   if (messaging.peerSocket.readyState === messaging.peerSocket.OPEN) {
     messaging.peerSocket.send(data);
   } else {
     console.log("No peerSocket connection");
+    setTimeout(() => sendMessage(key, value), 1000);
   }
 };
 

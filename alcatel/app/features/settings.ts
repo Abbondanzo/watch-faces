@@ -7,14 +7,14 @@ const SETTINGS_TYPE = "cbor";
 const SETTINGS_FILE = "settings.cbor";
 
 export interface SettingsData {
-  secondsEnabled: boolean;
+  secondsDial: boolean;
   backgroundColor: string;
 }
 
 class Settings implements Feature<SettingsData> {
   private callback: Callback<SettingsData> = () => {};
   private settings: SettingsData = {
-    secondsEnabled: true,
+    secondsDial: true,
     backgroundColor: "black",
   };
 

@@ -5,6 +5,7 @@ import Dial, { DialData } from "./features/dial";
 import HeartRate, { HeartRateData } from "./features/heart-rate";
 import Settings, { SettingsData } from "./features/settings";
 import Time, { TimeData } from "./features/time";
+import Weather, { WeatherData } from "./features/weather";
 
 /* ================ Clock ================ */
 const timeText = document.getElementById("time");
@@ -43,7 +44,7 @@ Dial.initialize(dialCallback);
 /* ================ Settings ================ */
 const background = document.getElementById("background") as RectElement;
 const settingsCallback = (data: SettingsData) => {
-  if (data.secondsEnabled) {
+  if (data.secondsDial) {
     if (dialContainer) dialContainer.class = "";
     Dial.start();
   } else {
@@ -53,3 +54,9 @@ const settingsCallback = (data: SettingsData) => {
   background.style.fill = data.backgroundColor;
 };
 Settings.initialize(settingsCallback);
+
+/* ================ Weather ================ */
+const weatherCallback = (data: WeatherData) => {
+  console.log(JSON.stringify(data));
+};
+Weather.initialize(weatherCallback);

@@ -2,8 +2,7 @@ import { Condition, sendWeather, WeatherData } from "../common/weather";
 import { receiveWeatherRequest } from "./../common/weather";
 import { getCurrentLocation } from "./location";
 
-export const initialize = () => {
-  const apiKey = "024f07a43db60fe73b53507aa39a8127"; // process.env.API_KEY;
+export const initialize = (apiKey: string) => {
   if (!apiKey) {
     console.log("Missing OpenWeather API key");
     return;

@@ -6,4 +6,4 @@ A simple, elegant digital watch faced based on the [Dribbble designs](https://dr
 
 ## Setup
 
-In the `companion/` folder, you will need to create a `config.ts` file that exports `API_KEY` as a string constant. This will represent your API key from [OpenWeatherAPI](https://home.openweathermap.org/).
+In the `companion/` folder, you will need to create a `config.ts` file that exports `API_KEY` as a string constant. This will represent your API key from [OpenWeatherAPI](https://home.openweathermap.org/). There is an example `config-example.ts` file that you can use and rename.

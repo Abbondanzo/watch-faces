@@ -30,7 +30,8 @@ class Dial implements Feature<DialData> {
   }
 
   private readonly tickHandler = (tickEvent: TickEvent) => {
-    if (this.callback) {
+    // If the granularity is not "seconds", the getSeconds value will be 0
+    if (clock.granularity === "seconds") {
       const second = tickEvent.date.getSeconds();
       this.callback({ second });
     }

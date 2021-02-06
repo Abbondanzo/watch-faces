@@ -35,6 +35,10 @@ text {
   opacity: 0.8;
 }
 
+.use-item {
+  display-align: center;
+}
+
 .use-item text {
   text-anchor: start;
   text-align: start;

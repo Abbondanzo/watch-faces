@@ -15,34 +15,33 @@ const displayCallback = (data: DisplayData) => {
 Display.initialize(displayCallback);
 
 /* ================ Clock ================ */
-const timeText = document.getElementById("time");
-const dateText = document.getElementById("date");
-
+const timeText = document.getElementById("time") as TextElement;
+const dateText = document.getElementById("date") as TextElement;
 const timeCallback = ({ time, date }: TimeData) => {
-  if (timeText) timeText.text = time;
-  if (dateText) dateText.text = date;
+  timeText.text = time;
+  dateText.text = date;
 };
 Time.initialize(timeCallback);
 
 /* ================ Heart Rate ================ */
-const heartRateText = document.getElementById("heart-rate-text");
+const heartRateText = document.getElementById("heart-rate-text") as TextElement;
 const heartRateCallback = (data: HeartRateData) => {
-  if (heartRateText) heartRateText.text = data.bpm;
+  heartRateText.text = data.bpm;
 };
 HeartRate.initialize(heartRateCallback);
 
 /* ================ Activity ================ */
-const stepsText = document.getElementById("steps-text");
+const activityText = document.getElementById("activity-text") as TextElement;
 const activityCallback = (data: ActivityData) => {
-  if (stepsText) stepsText.text = data.steps;
+  activityText.text = data.steps;
 };
 Activity.initialize(activityCallback);
 
 /* ================ Seconds Dial ================ */
-const dialContainer = document.getElementById("dial");
-const dialDots = dialContainer?.getElementsByTagName("circle") || [];
+const dialContainer = document.getElementById("dial") as GroupElement;
+const dialDots = dialContainer.getElementsByTagName("circle") || [];
 const toggleDialVisibility = (dialEnabled: boolean) => {
-  if (dialContainer) dialContainer.class = dialEnabled ? "" : "hidden";
+  dialContainer.class = dialEnabled ? "" : "hidden";
 };
 const toggleDial = (dialEnabled: boolean) => {
   toggleDialVisibility(dialEnabled);
@@ -60,21 +59,24 @@ const dialCallback = ({ second }: DialData) => {
 Dial.initialize(dialCallback);
 
 /* ================ Weather ================ */
+const weatherContainer = document.getElementById(
+  "weather-container"
+) as GraphicsElement;
 const weatherText = document.getElementById("weather-text") as TextElement;
 const weatherImage = document.getElementById("weather-image") as ImageElement;
 const toggleWeather = (enabled: boolean) => {
   if (enabled) {
     Weather.enable();
-    weatherText.style.opacity = 1;
-    weatherImage.style.opacity = 1;
+    weatherContainer.style.opacity = 1;
   } else {
     Weather.disable();
-    weatherText.style.opacity = 0;
-    weatherImage.style.opacity = 0;
+    weatherContainer.style.opacity = 0;
   }
 };
 const weatherCallback = (data: WeatherData) => {
-  if (weatherText) weatherText.text = data.temperature;
+  // Assign text
+  weatherText.text = data.temperature;
+  // Assign icon
   if (weatherImage) {
     switch (data.condition) {
       case "CLEAR_SKY":
@@ -105,6 +107,13 @@ const weatherCallback = (data: WeatherData) => {
         weatherImage.href = "images/weather/unknown.png";
     }
   }
+  // Center content
+  const boundingBox = weatherContainer.getBBox();
+  const trueLeft = boundingBox.left;
+  const trueRight = weatherText.getBBox().right;
+  const width = trueRight - trueLeft;
+  const newX = boundingBox.width / 2 - width / 2;
+  weatherContainer.x = newX;
 };
 Weather.initialize(weatherCallback);
 

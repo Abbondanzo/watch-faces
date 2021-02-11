@@ -82,7 +82,13 @@ const fetchWeather = async (
     const tempF = (tempC * 9) / 5 + 32;
     const city = data.name;
 
-    lastWeatherData = { condition, tempC, tempF, city };
+    lastWeatherData = {
+      condition,
+      tempC,
+      tempF,
+      city,
+      timestamp: timeCalculated,
+    };
 
     return lastWeatherData;
   } catch (error) {

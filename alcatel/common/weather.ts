@@ -17,6 +17,7 @@ export interface WeatherData {
   tempF: number;
   tempC: number;
   condition: Condition;
+  timestamp: number; // ISO in seconds
 }
 
 const WEATHER_KEY = "WEATHER";

@@ -15,6 +15,7 @@ const WEATHER_FILE = "weather.cbor";
 export interface WeatherData {
   temperature: string;
   condition: Condition;
+  timestamp: number; // ISO in seconds
 }
 
 class Weather implements Feature<WeatherData> {
@@ -39,13 +40,22 @@ class Weather implements Feature<WeatherData> {
     });
     me.addEventListener("unload", this.saveWeather.bind(this));
     receiveWeather((data) => {
-      this.lastWeather = {
-        temperature:
-          units.temperature === "C"
-            ? `${Math.round(data.tempC)} C`
-            : `${Math.round(data.tempF)} F`,
-        condition: data.condition,
-      };
+      if (this.isSixHoursLater(data.timestamp)) {
+        this.lastWeather = {
+          temperature: "--",
+          condition: "UNKNOWN",
+          timestamp: 0,
+        };
+      } else {
+        this.lastWeather = {
+          temperature:
+            units.temperature === "C"
+              ? `${Math.round(data.tempC)} C`
+              : `${Math.round(data.tempF)} F`,
+          condition: data.condition,
+          timestamp: data.timestamp,
+        };
+      }
       this.callback(this.lastWeather);
     });
     this.start();
@@ -88,12 +98,18 @@ class Weather implements Feature<WeatherData> {
       return {
         temperature: "--",
         condition: "UNKNOWN",
+        timestamp: 0,
       };
     }
   }
 
   private saveWeather() {
     fs.writeFileSync(WEATHER_FILE, this.lastWeather, WEATHER_TYPE);
+  }
+
+  private isSixHoursLater(timestamp: number) {
+    const currentTimestamp = new Date().getTime() / 1000;
+    return currentTimestamp - timestamp >= 60 * 60 * 6;
   }
 }
 

@@ -40,7 +40,7 @@ class Weather implements Feature<WeatherData> {
     });
     me.addEventListener("unload", this.saveWeather.bind(this));
     receiveWeather((data) => {
-      if (this.isSixHoursLater(data.timestamp)) {
+      if (this.isTimeToReset(data.timestamp)) {
         this.lastWeather = {
           temperature: "--",
           condition: "UNKNOWN",
@@ -107,9 +107,9 @@ class Weather implements Feature<WeatherData> {
     fs.writeFileSync(WEATHER_FILE, this.lastWeather, WEATHER_TYPE);
   }
 
-  private isSixHoursLater(timestamp: number) {
+  private isTimeToReset(timestamp: number) {
     const currentTimestamp = new Date().getTime() / 1000;
-    return currentTimestamp - timestamp >= 60 * 60 * 6;
+    return currentTimestamp - timestamp >= 60 * 60 * 1; // 1 hour
   }
 }
 

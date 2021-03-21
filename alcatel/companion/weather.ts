@@ -1,10 +1,11 @@
 import { Condition, sendWeather, WeatherData } from "../common/weather";
 import { receiveWeatherRequest } from "./../common/weather";
 import { getCurrentLocation } from "./location";
+import { debug } from "./debug";
 
 export const initialize = (apiKey: string) => {
   if (!apiKey) {
-    console.log("Missing OpenWeather API key");
+    console.error("Missing OpenWeather API key");
     return;
   }
   receiveWeatherRequest(async () => {
@@ -20,7 +21,8 @@ export const initialize = (apiKey: string) => {
       if (!weatherData) throw new Error("Unable to obtain weather data");
       sendWeather(weatherData);
     } catch (error) {
-      console.error("Error responding to weather request:", error.message);
+      const message = `Error responding to weather request: ${error.message}`;
+      debug(message);
     }
   });
 };
@@ -92,7 +94,7 @@ const fetchWeather = async (
 
     return lastWeatherData;
   } catch (error) {
-    console.error(error.message);
+    debug(error.message || JSON.stringify(error));
     return lastWeatherData;
   }
 };

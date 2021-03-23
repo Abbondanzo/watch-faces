@@ -35,7 +35,10 @@ registerSettingsPage(({ settings }) => {
       >
         {logs.length > 0 ? (
           logs.map((log, index) => (
-            <TextImageRow key={index} label={log[1]} sublabel={log[0]} />
+            <Text key={index}>
+              {log[1]}
+              <TextImageRow sublabel={log[0]} />
+            </Text>
           ))
         ) : (
           <Text italic>No logs</Text>

@@ -1,8 +1,8 @@
-import { getLogs } from "./debug";
+import { getLogs, clearLogs } from "./debug";
 
-registerSettingsPage(({ settings }) => {
+registerSettingsPage(({ settings, settingsStorage }) => {
   const logs = getLogs(settings);
-  console.log(JSON.stringify(settings));
+  const resetLogs = () => clearLogs(settingsStorage);
   return (
     <Page>
       <Section
@@ -33,6 +33,7 @@ registerSettingsPage(({ settings }) => {
           </Text>
         }
       >
+        {logs.length > 0 && <Button label="Clear Logs" onClick={resetLogs} />}
         {logs.length > 0 ? (
           logs.map((log, index) => (
             <Text key={index}>

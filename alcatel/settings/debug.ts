@@ -8,3 +8,7 @@ export const getLogs = (settings: any): DebugLog[] => {
     return [];
   }
 };
+
+export const clearLogs = (settingsStorage: LiveStorage) => {
+  settingsStorage.setItem(DEBUG_KEY, "[]");
+};

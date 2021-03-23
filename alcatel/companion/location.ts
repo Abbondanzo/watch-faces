@@ -1,5 +1,7 @@
 import { geolocation } from "geolocation";
 
+import { debug } from "./debug";
+
 interface Location {
   latitude: number;
   longitude: number;
@@ -19,7 +21,9 @@ export const getCurrentLocation = async (): Promise<Location | null> => {
       },
       (error) => {
         resolve(lastLocation);
-        console.error(error.code, error.message);
+        const message = `Current position error: ${error.code} ${error.message}`;
+        console.error(message);
+        debug(message);
       },
       {
         timeout: TIMEOUT,

@@ -10,7 +10,7 @@ import Weather, { WeatherData } from "./features/weather";
 
 /* ================ Display (handles clock granularity) ================ */
 const displayCallback = (data: DisplayData) => {
-  if (!data.on) dialCallback({ second: -1 });
+  dialCallback({ second: new Date().getSeconds() });
   toggleDialVisibility(data.on && Settings.isSecondsDialEnabled());
 };
 Display.initialize(displayCallback);

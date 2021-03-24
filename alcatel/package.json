@@ -1,6 +1,6 @@
 {
   "name": "alcatel",
-  "version": "0.2.10",
+  "version": "0.2.12",
   "license": "MIT",
   "scripts": {
     "start": "fitbit",

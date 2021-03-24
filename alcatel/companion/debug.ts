@@ -23,7 +23,7 @@ const setLogs = (logs: DebugLog[]) => {
 };
 
 export const debug = (message: string) => {
-  const logMessage: DebugLog = [new Date().toISOString(), message];
+  const logMessage: DebugLog = [new Date().toLocaleString(), message];
   const newLogs = getLogs();
   if (newLogs.length >= MAX_LOGS_LENGTH) {
     newLogs.shift();

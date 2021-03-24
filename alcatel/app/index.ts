@@ -10,6 +10,7 @@ import Weather, { WeatherData } from "./features/weather";
 
 /* ================ Display (handles clock granularity) ================ */
 const displayCallback = (data: DisplayData) => {
+  if (!data.on) dialCallback({ second: -1 });
   toggleDialVisibility(data.on && Settings.isSecondsDialEnabled());
 };
 Display.initialize(displayCallback);
@@ -51,9 +52,15 @@ const toggleDial = (dialEnabled: boolean) => {
     Dial.stop();
   }
 };
+const getOpacity = (idx: number, second: number): number => {
+  if (second === -1) return 0.2; // Display off
+  if (idx < second) return 0.8; // Highlight existing second
+  if (idx === second) return 0.4; // Hint the next second
+  return 0.2; // Idx not elapsed
+};
 const dialCallback = ({ second }: DialData) => {
   for (let idx = 0; idx < 60; idx++) {
-    dialDots[idx].style.opacity = idx <= second ? 0.8 : 0.2;
+    dialDots[idx].style.opacity = getOpacity(idx, second);
   }
 };
 Dial.initialize(dialCallback);

@@ -61,7 +61,7 @@ const fetchWeather = async (
   longitude: number
 ): Promise<WeatherData | null> => {
   // Return the same data if queried 10 minutes ago
-  if (new Date().getTime() / 1000 - timeCalculated < 600) {
+  if (lastWeatherData && new Date().getTime() / 1000 - timeCalculated < 600) {
     console.log("Returning saved weather");
     return lastWeatherData;
   }
@@ -94,7 +94,8 @@ const fetchWeather = async (
 
     return lastWeatherData;
   } catch (error) {
-    debug(error.message || JSON.stringify(error));
+    const message = `Weather error: ${error.message || JSON.stringify(error)}`;
+    debug(message);
     return lastWeatherData;
   }
 };

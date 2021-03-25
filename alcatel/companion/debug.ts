@@ -29,6 +29,6 @@ export const debug = (message: string) => {
     newLogs.shift();
   }
   newLogs.push(logMessage);
-  console.log(newLogs);
+  console.log(logMessage);
   setLogs(newLogs);
 };
